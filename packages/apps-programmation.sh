@@ -20,8 +20,7 @@ INSTALLER_GITHUBDESKTOP=1
 
 # DEBREATE 
 if [[ "$INSTALLER_DEBREATE" -eq 1 ]]; then
-	apt install python3 python3-wxgtk-webview4.0 python3-wxgtk4.0 fakeroot dpkg util-linux debianutils
-	./megadl.sh https://mega.nz/file/Yn1SGbJa#yK2e6ZPw3Hvu6uxTN3nPfUl-IX7MiiGFah-hj1_reZ0
+	cp ./debs/debreate_0.8-dev9_all.deb /etc/fenikkusu/openbox-scripts/debreate_0.8-dev9_all.deb
 	dpkg -i /etc/fenikkusu/openbox-scripts/debreate_0.8-dev9_all.deb
 fi
 
