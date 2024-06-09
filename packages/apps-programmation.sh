@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Applications : Jeux
+# Applications : Programmation
 # Projet Fenikkusu
 #
 # Applications nécessaires :

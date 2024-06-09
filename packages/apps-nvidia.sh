@@ -2,6 +2,7 @@
 
 # Applications : NVIDIA
 # Projet Fenikkusu
+#
 # Applications nécessaires :
 # - Driver Nvidia
 # - NVIDIA Settings
