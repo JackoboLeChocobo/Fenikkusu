@@ -4,7 +4,6 @@
 # Projet Fenikkusu
 #
 
-rm ./installation_liste_devs
 for device in /sys/block/*
 do
     if udevadm info --query=property --path=$device | grep -q ^ID_BUS=usb
@@ -31,18 +30,68 @@ if echo "$dev" | grep '/'; then
 	echo " "
 	sleep 3
 
-	#apt install grub-pc-bin grub-efi-amd64-bin
+	apt install progress grub-pc-bin grub-efi-amd64-bin
+
+	umount /media/install/mnt
+	umount /media/install/datas
+	umount /media/*/*
+
+	mkdir -pv /media
+	mdkir -pv /media/install
+	mkdir -pv /media/install/mnt
+	mkdir -pv /media/install/datas
+
+	wipefs -af ${dev}
+
+	(
+	echo g
+	echo n
+	echo 1
+	echo 
+	echo +600M
+	echo n
+	echo 2
+	echo 
+	echo 
+	echo t
+	echo 1
+	echo uefi
+	echo M
+	echo a
+	echo r
+	echo w
+	) | sudo fdisk --wipe=always --wipe-partitions always $dev
+
+	systemctl daemon-reload
 
 	mkfs.fat -F32 ${dev}1
-	mkdir -pv /media/fenikkusu/setup/
-	mkdir -pv /media/fenikkusu/setup/mnt
-	mkdir -pv /media/fenikkusu/setup/data
+	mkfs.ext4 ${dev}2
+		
+	mount -o umask=000 ${dev}1 /media/install/mnt
+	grub-install --removable --boot-directory=/media/install/mnt/boot --efi-directory=/media/install/mnt --target=x86_64-efi $dev
+
+	uuid=`blkid -s UUID -o value ${dev}2`
+	sleep 10
 	
-	mount -o umask=000 /dev/sdX1 /media/fenikkusu/setup/mnt
-	grub-install --removable --boot-directory=/media/fenikkusu/setup/mnt/boot --efi-directory=/media/fenikkusu/setup/mnt --target=x86_64-efi $dev
-	touch /media/fenikkusu/setup/mnt/boot/grub/grub.cfg
+	echo "menuentry 'Fenikkusu'{" > /media/install/mnt/boot/grub/grub.cfg
+	echo "insmod part_gpt" >> /media/install/mnt/boot/grub/grub.cfg
+	echo "insmod ext2" >> /media/install/mnt/boot/grub/grub.cfg
+	echo "search --no-floppy --fs-uuid --set=root $uuid" >> /media/install/mnt/boot/grub/grub.cfg
+	echo "linux /Fenikkusu/boot/vmlinuz root=UUID=$uuid ro quiet splash perch" >> /media/install/mnt/boot/grub/grub.cfg
+	echo "initrd /Fenikkusu/boot/initrfs.img" >> /media/install/mnt/boot/grub/grub.cfg
+	echo "}" >> /media/install/mnt/boot/grub/grub.cfg
 	
-	umount /media/fenikkusu/setup/mnt
+
+	mount ${dev}2 /media/install/datas
+	echo "Copie des données en cours..."
+	sleep 3
+	cp -dR Fenikkusu /media/install/datas & progress -mp $!
+	chmod 777 -R /media/install/datas
+	
+	umount /media/install/mnt
+	umount /media/install/datas
+	
+	echo "Installation terminée !"
 fi
 
 
