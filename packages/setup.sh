@@ -18,5 +18,5 @@ packfenikkusu=`zenity \
 
 if echo "$packfenikkusu" | grep '/'; then
 	chmod +x /etc/fenikkusu/Fenikkusu/packages/${packfenikkusu}.sh
-	/usr/bin/lxterminal -e /etc/fenikkusu/Fenikkusu/packages/${packfenikkusu}.sh
+	/usr/bin/lxterminal -e "sudo /etc/fenikkusu/Fenikkusu/packages/${packfenikkusu}.sh"
 fi
