@@ -12,7 +12,7 @@ packfenikkusu=`zenity \
 	--column="Description" \
 	"/apps-bureautique" "Logiciels pour une utilisation quotidienne" \
 	"/apps-jeux" "Logiciels pour pouvoir jouer avec vos jeux" \
-	"/apps-nvidia" "Installaion des drivers pour votre carte Nvidia" \
+	"/apps-nvidia" "Installation des drivers pour votre carte Nvidia" \
 	"/apps-programmation" "Logiciels pour développer vos projets informatiques" \
 	"/apps-reseau" "Logiciels concernant le réseau informatique" 2> /dev/null`
 
