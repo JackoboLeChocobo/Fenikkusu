@@ -17,5 +17,6 @@ packfenikkusu=`zenity \
 	"/apps-reseau" "Logiciels concernant le réseau informatique" 2> /dev/null`
 
 if echo "$packfenikkusu" | grep '/'; then
+	chmod +x /etc/fenikkusu/Fenikkusu/packages/${packfenikkusu}.sh
 	/usr/bin/lxterminal -e /etc/fenikkusu/Fenikkusu/packages/${packfenikkusu}.sh
 fi
