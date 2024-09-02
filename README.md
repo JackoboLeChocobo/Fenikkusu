@@ -1,6 +1,6 @@
 # Fenikkusu
 
-Site : [[https://jackobolechocobo.github.io/](https://jackobo.info/?datas=fenikkusu)]([https://jackobolechocobo.github.io/](https://jackobo.info/?datas=fenikkusu))
+Site : [https://jackobo.info/?datas=fenikkusu](https://jackobo.info/?datas=fenikkusu)
 
 Fenikkusu (Phénix en japonais) est une distribution Linux compacte, rapide et moderne. Avec la possibilité de fonctionner directement à partir d'un disque dur sur votre PC ou d'une clé/disque dur USB, Fenikkusu est portable. Elle offre une interface utilisateur visuellement attrayante et une sélection de programmes de base préinstallées comme un gestionnaire de fichiers, un éditeur de texte, un navigateur Web, etc.
 
