@@ -6,8 +6,8 @@
 # Applications nécessaires :
 # - GIMP
 # - Inkscape
-# - Libre Office
 # - Mozilla Firefox
+# - OnlyOffice
 # - VLC Media Player
 #
 # Applications optionnelles :
@@ -24,10 +24,6 @@ apt install gimp
 # INKSCAPE
 apt install inkscape
 
-# LIBRE OFFICE
-wget https://appimages.libreitalia.org/LibreOffice-still.standard-x86_64.AppImage -P /etc/fenikkusu/openbox-scripts -c
-chmod +x /etc/fenikkusu/openbox-scripts/LibreOffice-still.standard-x86_64.AppImage
-
 # MOZILLA FIREFOX
 install -d -m 0755 /etc/apt/keyrings
 wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
@@ -39,6 +35,10 @@ Pin: origin packages.mozilla.org
 Pin-Priority: 1000
 ' | tee /etc/apt/preferences.d/mozilla
 apt update && apt install firefox firefox-l10n-fr
+
+# ONLYOFFICE DESKTOP
+wget https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb -P /etc/fenikkusu/openbox-scripts -c
+dpkg -i /etc/fenikkusu/openbox-scripts/onlyoffice-desktopeditors_amd64.deb
 
 # UPSCAYL 
 if [[ "$INSTALLER_UPSCAYL" -eq 1 ]]; then
@@ -72,17 +72,17 @@ echo "- Nom suggéré : Inkscape"
 echo "- Executable : /usr/bin/inkscape"
 echo "- Icone : /etc/fenikkusu/openbox-icons/inkscape.svg"
 echo " "
-echo "LibreOffice :"
-echo "- Catégorie suggérée : Bureautique"
-echo "- Nom suggéré : LibreOffice"
-echo "- Executable : /etc/fenikkusu/openbox-scripts/LibreOffice-still.standard-x86_64.AppImage"
-echo "- Icone : /etc/fenikkusu/openbox-icons/libreoffice.svg"
-echo " "
 echo "Mozilla Firefox :"
 echo "- Catégorie suggérée : Internet"
 echo "- Nom suggéré : Mozilla Firefox"
 echo "- Executable : /usr/bin/firefox"
 echo "- Icone : /etc/fenikkusu/openbox-icons/firefox.svg"
+echo " "
+echo "OnlyOffice Desktop :"
+echo "- Catégorie suggérée : Bureautique"
+echo "- Nom suggéré : OnlyOffice"
+echo "- Executable : /usr/bin/onlyoffice-desktopeditors %U"
+echo "- Icone : /etc/fenikkusu/openbox-icons/onlyoffice.svg"
 if [[ "$INSTALLER_UPSCAYL" -eq 1 ]]; then
 	echo " "
 	echo "Upscayl :"
